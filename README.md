@@ -6,6 +6,7 @@ Belajar Rest Api menggunakan Lumen:
     Note :  
     A. setelah berhasil instalasi flipbox lumen generator tambahkan kode program berikut pada file bootstrap/app.php :  
        $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+       <br>
     B. Untuk referensi instalasi flipbox lumen generator:https://github.com/flipboxstudio/lumen-generator
     
  
