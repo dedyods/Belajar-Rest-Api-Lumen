@@ -27,7 +27,7 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-       
+
         $data = $request->all();
         $data['password'] = Hash::make($request->get('password'));
 
@@ -36,12 +36,13 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        //    Cek email dan passwor
+        //    Cek email dan password
         $cekLogin = $request->only('email', 'password');
 
         // dd($credentials);
-        if (!$token = auth()->guard('api')->attempt($cekLogin)) {
-            //response login "failed"
+        if (!$token = auth()->attempt($cekLogin)) {
+
+        //response login "failed"
             return response()->json([
                 'success' => false,
                 'message' => 'Login Failed !!'
@@ -50,8 +51,9 @@ class AuthController extends Controller
 
         return response()->json([
             'success' => true,
-            'user'    => auth()->guard('api')->user(),
-            'token'   => $token
+            'user'    => auth()->user(),
+            'token'   => $token,
+
         ], 200);
     }
 }
