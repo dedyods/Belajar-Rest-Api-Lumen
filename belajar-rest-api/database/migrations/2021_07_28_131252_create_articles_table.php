@@ -4,9 +4,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateCategoriesTable.
+ * Class CreateArticlesTable.
  */
-class CreateCategoriesTable extends Migration
+class CreateArticlesTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -15,12 +15,14 @@ class CreateCategoriesTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('categories', function(Blueprint $table) {
+		Schema::create('articles', function(Blueprint $table) {
             $table->increments('id');
-			$table->string('name');
+			$table->string('title');
 			$table->string('slug');
-			$table->text('image')->nullable();
-			$table->string('type', 20)->comment('article,video,product');
+			$table->text('description');
+			$table->text('image');
+			$table->integer('category_id');
+			$table->enum('active', array('y', 'n'));
             $table->timestamps();
 		});
 	}
@@ -32,6 +34,6 @@ class CreateCategoriesTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('categories');
+		Schema::drop('articles');
 	}
 }
