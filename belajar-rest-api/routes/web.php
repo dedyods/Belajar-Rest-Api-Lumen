@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
 /** @var \Laravel\Lumen\Routing\Router $router */
 // use Illuminate\Support\Facades\Route;
 /*
@@ -26,20 +26,20 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('me', 'AuthController@me');
 });
 
-Route::group(['middleware'=> 'api'], function ($router) {
+Route::group(['middleware' => 'api'], function ($router) {
+
+    // Route Article
+    Route::post('/article', 'ArticleController@store');
     // Route Category
-    Route::get('/category','CategoryController@index');
-    Route::get('/category/{id}','CategoryController@show');
-    Route::put('/category/{id}','CategoryController@update');
-    Route::delete('/category/{id}','CategoryController@destroy');
-    Route::post('/category','CategoryController@store');
-
-
+    Route::get('/category', 'CategoryController@index');
+    Route::get('/category/{id}', 'CategoryController@show');
+    Route::put('/category/{id}', 'CategoryController@update');
+    Route::delete('/category/{id}', 'CategoryController@destroy');
+    Route::post('/category', 'CategoryController@store');
 
 });
 
-Route::group(['middleware' =>'api','prefix'=>'api/user'], function ($router){
-    Route::get('/','UserController@index');
-    // Route::get('/category','CategoryController@index');
+Route::group(['middleware' => 'api', 'prefix' => 'api/user'], function ($router) {
+    Route::get('/', 'UserController@index');
+    Route::get('/category', 'CategoryController@index');
 });
-

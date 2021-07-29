@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Repositories\CategoryRepositoryEloquent;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
-use Illuminate\Support\Str;
+use App\Http\Resources\CategoryResource;
+use App\Services\CategoryService;
+
 
 class CategoryController extends Controller
 {
@@ -21,9 +23,16 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->categoryRepository->all();
+        // return $this->categoryRepository->all();
+        if($request->has('type')){
+            $category = $this->categoryRepository->findWhere(['type'=>$request->type]);
+        }
+        else{
+            $category = $this->categoryRepository->all();
+        }
+        return CategoryResource::collection($category);
     }
 
     /**
@@ -32,16 +41,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateCategoryRequest $request)
+    public function store(CreateCategoryRequest $request, CategoryService $categoryService)
     {
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->name, '-');
-        if($request->hasFile('image')) 
-        {
-            // logic upload
-        }
+        $data = $categoryService->store($request);
         return $this->categoryRepository->create($data);
-        
     }
 
     /**
@@ -53,7 +56,6 @@ class CategoryController extends Controller
     public function show($id)
     {
         return $this->categoryRepository->find($id);
-        
     }
 
     /**
@@ -63,11 +65,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, $id)
+    public function update(UpdateCategoryRequest $request, $id, CategoryService $categoryService)
     {
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->name, '-');
-        return $this->categoryRepository->update($data, $id);
+        $data  = $categoryService->update($request);
+        return $this->categoryRepository->update($data,$id);
     }
 
     /**

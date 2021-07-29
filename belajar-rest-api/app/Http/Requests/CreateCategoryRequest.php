@@ -24,8 +24,8 @@ class CreateCategoryRequest extends FormRequest
     protected function rules(): array
     {
         return [
-            'name'  => 'required',
-            'type'  => 'required'
+            'name'  =>'required',
+            'type'  =>'required'
         ];
     }
 }
