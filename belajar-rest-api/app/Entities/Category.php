@@ -20,6 +20,10 @@ class Category extends Model implements Transformable
      *
      * @var array
      */
+<<<<<<< Updated upstream
     protected $fillable = ['name','type','slug','image'];
+=======
+    protected $fillable = ['name','type','image','slug'];
+>>>>>>> Stashed changes
 
 }

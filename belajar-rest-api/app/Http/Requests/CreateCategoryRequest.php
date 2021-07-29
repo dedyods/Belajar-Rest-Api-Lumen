@@ -24,8 +24,13 @@ class CreateCategoryRequest extends FormRequest
     protected function rules(): array
     {
         return [
+<<<<<<< Updated upstream
             'name'  =>'required',
             'type'  =>'required'
+=======
+            'name'     =>  'required',
+            'type'     =>  'required',
+>>>>>>> Stashed changes
         ];
     }
 }
