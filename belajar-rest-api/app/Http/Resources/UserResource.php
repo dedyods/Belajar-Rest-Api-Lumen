@@ -14,10 +14,6 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-<<<<<<< Updated upstream
-        return parent::toArray($request);
-       
-=======
         // return parent::toArray($request);
         return [
             'id'    => $this->id,
@@ -25,6 +21,5 @@ class UserResource extends JsonResource
             'image' => url('/category_image/'. $this->image),
             'type'  => $this->type,
         ];
->>>>>>> Stashed changes
     }
 }
