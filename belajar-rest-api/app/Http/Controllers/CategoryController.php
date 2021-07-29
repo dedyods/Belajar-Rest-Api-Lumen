@@ -9,7 +9,6 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Services\CategoryService;
 
-
 class CategoryController extends Controller
 {
     protected $categoryRepository;
@@ -26,10 +25,9 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         // return $this->categoryRepository->all();
-        if($request->has('type')){
-            $category = $this->categoryRepository->findWhere(['type'=>$request->type]);
-        }
-        else{
+        if ($request->has('type')) {
+            $category = $this->categoryRepository->findWhere(['type' => $request->type]);
+        } else {
             $category = $this->categoryRepository->all();
         }
         return CategoryResource::collection($category);
@@ -68,7 +66,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, $id, CategoryService $categoryService)
     {
         $data  = $categoryService->update($request);
-        return $this->categoryRepository->update($data,$id);
+        return $this->categoryRepository->update($data, $id);
     }
 
     /**
