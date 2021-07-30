@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
@@ -41,7 +38,6 @@ class AuthController extends Controller
 
         // dd($credentials);
         if (!$token = auth()->attempt($cekLogin)) {
-
         //response login "failed"
             return response()->json([
                 'success' => false,

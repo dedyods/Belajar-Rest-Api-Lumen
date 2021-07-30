@@ -11,14 +11,13 @@ class CategoryService
         $data   = $request->all();
         $data['slug'] = Str::slug($request->name, '-');
 
-        if($request->hasFile('image'))
-        {
+        if ($request->hasFile('image')) {
             $file       = $request->file('image');
             $file_name  =   $file->getClientOriginalName();
-            $file->move('category_image',$file_name);
+            $file->move('category_image', $file_name);
             $data['image'] = $file_name;
         }
-        
+
         return $data;
     }
 
@@ -29,5 +28,4 @@ class CategoryService
 
         return $data;
     }
-   
 }
